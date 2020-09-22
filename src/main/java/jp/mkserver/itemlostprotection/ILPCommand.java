@@ -30,6 +30,9 @@ public class ILPCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if(!plugin.power){
+            return true;
+        }
         if (!(sender instanceof Player)) {
             return true;
         }
@@ -53,6 +56,13 @@ public class ILPCommand implements CommandExecutor {
                 }
                 plugin.reload();
                 p.sendMessage(plugin.prefix+plugin.oC+"リロードしました。");
+                return true;
+            }else if(args[0].equalsIgnoreCase("freload")){
+                if(!p.hasPermission("ilprotect.freload")){
+                    return true;
+                }
+                plugin.fReload();
+                p.sendMessage(plugin.prefix+plugin.oC+"フォースリロードしました。");
                 return true;
             }else if(args[0].equalsIgnoreCase("clearwarn")){
                 if(!p.hasPermission("ilprotect.config")){
@@ -80,6 +90,8 @@ public class ILPCommand implements CommandExecutor {
                 }
                 p.sendMessage(plugin.prefix+"§e§l====コンフィグ関連ヘルプ====");
                 p.sendMessage(plugin.prefix+"§6/ilp reload : 設定変更を反映します。");
+                p.sendMessage(plugin.prefix+"§c/ilp freload : SQL設定を含めた設定変更を反映します。");
+                p.sendMessage(plugin.prefix+"§6/ilp setpower <true/false> : プラグインを再開/停止します。");
                 p.sendMessage(plugin.prefix+"§6/ilp setfee <金額> : 手数料を変更します。");
                 p.sendMessage(plugin.prefix+"§6/ilp setmarket <日数> : アイテムの保護期間を日単位で変更します。");
                 p.sendMessage(plugin.prefix+"§6/ilp setclearsec <秒数> : アイテム回収間隔を秒単位で変更します。");
@@ -93,20 +105,35 @@ public class ILPCommand implements CommandExecutor {
                 return true;
             }
         }else if(args.length==2){
-            if(args[0].equalsIgnoreCase("setfee")){
-                if(!p.hasPermission("ilprotect.config")){
+            if(args[0].equalsIgnoreCase("setfee")) {
+                if (!p.hasPermission("ilprotect.config")) {
                     return true;
                 }
                 int fee = 100;
-                try{
+                try {
                     fee = Integer.parseInt(args[1]);
-                }catch (NumberFormatException e){
-                    p.sendMessage(plugin.prefix+plugin.wC+"数字で入力してください。");
+                } catch (NumberFormatException e) {
+                    p.sendMessage(plugin.prefix + plugin.wC + "数字で入力してください。");
                     return true;
                 }
-                plugin.getConfig().set("fee",fee);
+                plugin.getConfig().set("fee", fee);
                 plugin.saveConfig();
-                p.sendMessage(plugin.prefix+plugin.oC+"手数料を上書きしました。/ilp reloadで反映されます。");
+                p.sendMessage(plugin.prefix + plugin.oC + "手数料を上書きしました。/ilp reloadで反映されます。");
+                return true;
+            }else if(args[0].equalsIgnoreCase("setpower")){
+                if(!p.hasPermission("ilprotect.config")){
+                    return true;
+                }
+                if(args[1].equalsIgnoreCase("true")){
+                    plugin.getConfig().set("power",true);
+                }else if(args[1].equalsIgnoreCase("false")){
+                    plugin.getConfig().set("power",false);
+                }else{
+                    p.sendMessage(plugin.prefix + plugin.wC + "true/falseのどちらかを入力してください。");
+                    return true;
+                }
+                plugin.saveConfig();
+                p.sendMessage(plugin.prefix+plugin.oC+"起動/停止を上書きしました。/ilp reloadで反映されます。");
                 return true;
             }else if(args[0].equalsIgnoreCase("setmarket")){
                 if(!p.hasPermission("ilprotect.config")){

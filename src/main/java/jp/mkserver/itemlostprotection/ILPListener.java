@@ -17,6 +17,9 @@ public class ILPListener implements Listener {
 
     @EventHandler
     public void onItemDespawn(ItemDespawnEvent event){
+        if(!plugin.power){
+            return;
+        }
         UUID thrower = event.getEntity().getThrower();
         if(thrower==null){
             return;

@@ -35,6 +35,7 @@ public final class ItemLostProtection extends JavaPlugin {
     private VaultAPI vault;
     private FileConfiguration config;
 
+    protected boolean power = true;
     private int fee = 100;
     private int clearsec = 300;
     private int marketday = 3;
@@ -48,6 +49,7 @@ public final class ItemLostProtection extends JavaPlugin {
         // Plugin startup logic
         saveDefaultConfig();
         config = getConfig();
+        power = config.getBoolean("power",true);
         fee = config.getInt("fee",100);
         clearsec = config.getInt("clear.sec",300);
         marketday = config.getInt("marketday",3);
@@ -62,7 +64,7 @@ public final class ItemLostProtection extends JavaPlugin {
             }
             countsec = clearsec;
             Bukkit.getScheduler().runTaskTimerAsynchronously(this,()->{
-                if(clearsec<=0){
+                if(clearsec<=0||!power){
                     return;
                 }
 
@@ -149,6 +151,11 @@ public final class ItemLostProtection extends JavaPlugin {
             noClearlist = config.getStringList("clear.noclear");
         }
         countsec = clearsec;
+    }
+
+    public void fReload(){
+        reload();
+        sql.init();
     }
 
     public boolean checkHasfee(Player p){

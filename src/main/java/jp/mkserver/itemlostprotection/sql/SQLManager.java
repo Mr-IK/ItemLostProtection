@@ -64,6 +64,10 @@ public class SQLManager {
         this.plugin = plugin;
         this.conName = name;
         this.connected = false;
+        init();
+    }
+
+    public void init(){
         loadConfig();
 
         int result;
@@ -85,7 +89,6 @@ public class SQLManager {
                 "uuid text, " +
                 "item text"+
                 ");");
-
     }
 
 
