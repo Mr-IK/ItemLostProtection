@@ -82,6 +82,11 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>com.github.Mr-IK</groupId>
+            <artifactId>FlagManager</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api-1.16.2</artifactId>
             <version>1.16.2-R0.1-SNAPSHOT</version>

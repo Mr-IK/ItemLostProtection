@@ -79,8 +79,6 @@ public class SQLManager {
         }
 
         //テーブル作成はここ
-
-        //テストDB
         execute("CREATE TABLE if not exists drop_items(" +
                 "id int auto_increment not null primary key," +
                 "time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP," +

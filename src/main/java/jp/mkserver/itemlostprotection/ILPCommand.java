@@ -1,5 +1,7 @@
 package jp.mkserver.itemlostprotection;
 
+import jdk.vm.ci.amd64.AMD64;
+import jp.mkserver.flagmanager.FlagAPI;
 import jp.mkserver.itemlostprotection.inv.InvListener;
 import jp.mkserver.itemlostprotection.inv.InventoryAPI;
 import jp.mkserver.itemlostprotection.inv.KInventory;

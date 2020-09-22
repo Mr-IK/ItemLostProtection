@@ -93,6 +93,9 @@ public final class ItemLostProtection extends JavaPlugin {
     }
 
     public void putLostedItem(ItemStack item, UUID droper){
+        if(droper==null||item==null){
+            return;
+        }
         Bukkit.getScheduler().runTaskAsynchronously(this,()->{
             sql.execute("INSERT INTO drop_items (uuid,item)  VALUES ('"+droper.toString()+"','"+itemToBase64(item)+"');");
         });
