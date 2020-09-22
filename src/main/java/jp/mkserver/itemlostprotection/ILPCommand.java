@@ -43,7 +43,7 @@ public class ILPCommand implements CommandExecutor {
             openGUI(p,null,"main",new String[]{});
         }else if(args.length==1){
             if(args[0].equalsIgnoreCase("clear")){
-                if(!p.hasPermission("ilprotect.forceclear")){
+                if(!p.hasPermission("ilprotect.fclear")){
                     return true;
                 }
                 plugin.clearAllItem();
@@ -83,12 +83,13 @@ public class ILPCommand implements CommandExecutor {
                 p.sendMessage(plugin.prefix+plugin.oC+"除外ワールドリストをクリアしました。/ilp reloadで反映されます。");
                 return true;
             }else if(args[0].equalsIgnoreCase("help")) {
-                if (!p.hasPermission("ilprotect.forceclear")) {
+                if (!p.hasPermission("ilprotect.config")) {
                     return true;
                 }
                 p.sendMessage(plugin.prefix+"§e§l====コンフィグ関連ヘルプ====");
                 p.sendMessage(plugin.prefix+"§6/ilp reload : 設定変更を反映します。");
                 p.sendMessage(plugin.prefix+"§c/ilp freload : SQL設定を含めた設定変更を反映します。");
+                p.sendMessage(plugin.prefix+"§c/ilp fclear : 強制でドロップアイテムを削除します");
                 p.sendMessage(plugin.prefix+"§6/ilp setpower <true/false> : プラグインを再開/停止します。");
                 p.sendMessage(plugin.prefix+"§6/ilp setfee <金額> : 手数料を変更します。");
                 p.sendMessage(plugin.prefix+"§6/ilp setmarket <日数> : アイテムの保護期間を日単位で変更します。");
@@ -99,7 +100,7 @@ public class ILPCommand implements CommandExecutor {
                 p.sendMessage(plugin.prefix+"§6/ilp addnoclear <ワールド名> : アイテム回収除外ワールドを追加します。");
                 p.sendMessage(plugin.prefix+"§6/ilp remnoclear <ワールド名> : アイテム回収除外ワールドを追加します。");
                 p.sendMessage(plugin.prefix+"§6/ilp clearworlds : 回収除外ワールドリストをクリアします。");
-                p.sendMessage(plugin.prefix+"§e§l=========================");
+                p.sendMessage(plugin.prefix+"§e§l============================");
                 return true;
             }
         }else if(args.length==2){
