@@ -1,0 +1,12 @@
+name: ItemLostProtection
+version: ${project.version}
+main: jp.mkserver.itemlostprotection.ItemLostProtection
+api-version: 1.13
+authors: [ Mr_IK ]
+description: ItemLostProtection
+depend: [Vault]
+commands:
+  ilp:
+    description: ItemLostProtection
+    usage: /<command>
+    default: op
