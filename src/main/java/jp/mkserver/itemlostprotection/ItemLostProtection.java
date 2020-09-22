@@ -371,7 +371,7 @@ public final class ItemLostProtection extends JavaPlugin {
         Calendar cal = Calendar.getInstance();
         cal.setTime(item.date);
         cal.add(Calendar.DAY_OF_MONTH,marketday);
-        return new Date().before(cal.getTime());
+        return cal.getTime().before(Calendar.getInstance().getTime());
     }
 
     public static ItemStack itemFromBase64(String data) {
