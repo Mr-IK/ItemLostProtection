@@ -1,7 +1,5 @@
 package jp.mkserver.itemlostprotection.sql;
 
-import jp.mkserver.itemlostprotection.sql.dbtypes.Type_MySQL;
-import jp.mkserver.itemlostprotection.sql.dbtypes.Type_SQLite;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 

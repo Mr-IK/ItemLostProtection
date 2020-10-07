@@ -1,4 +1,4 @@
-package jp.mkserver.itemlostprotection.sql.dbtypes;
+package jp.mkserver.itemlostprotection.sql;
 
 import jp.mkserver.itemlostprotection.sql.DBConnect;
 import org.bukkit.Bukkit;

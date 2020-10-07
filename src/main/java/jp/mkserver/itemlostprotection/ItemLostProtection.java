@@ -221,6 +221,26 @@ public final class ItemLostProtection extends JavaPlugin {
         return null;
     }
 
+    public boolean hasLostedItems(UUID droper){
+        String exe = "SELECT * FROM drop_items WHERE uuid = '" + droper.toString() + "';";
+        SQLManager.Query qu = sql.query(exe);
+        ResultSet rs = qu.getRs();
+        if (rs != null) {
+            try {
+                if(rs.next()) {
+                    qu.close();
+                    return true;
+                }
+                qu.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                qu.close();
+                return false;
+            }
+        }
+        return false;
+    }
+
     public List<LostedItem> getLostedItems(UUID droper){
         String exe = "SELECT * FROM drop_items WHERE uuid = '" + droper.toString() + "';";
         List<LostedItem> list = new ArrayList<>();

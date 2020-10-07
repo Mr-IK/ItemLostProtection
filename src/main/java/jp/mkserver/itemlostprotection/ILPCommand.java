@@ -249,8 +249,13 @@ public class ILPCommand implements CommandExecutor {
             InventoryAPI inv = invs;
             if (invname.equalsIgnoreCase("main")) {
                 inv = KInventory.get3_9Inv(p, inv, "§3§lアイテム収集局 §6§lメインページ");
-                inv.setItem(11, inv.createUnbitem("§a§l自分の落とし物を確認する", new String[]{"§e落としてしまったアイテムの確認や回収はこちらから"},
-                        Material.BUCKET, 0, false));
+                if(plugin.hasLostedItems(p.getUniqueId())){
+                    inv.setItem(11, inv.createUnbitem("§6§l自分の落とし物を確認する", new String[]{"§e落としてしまったアイテムの確認や回収はこちらから"},
+                            Material.WATER_BUCKET, 0, false));
+                }else {
+                    inv.setItem(11, inv.createUnbitem("§a§l自分の落とし物を確認する", new String[]{"§e落としてしまったアイテムの確認や回収はこちらから"},
+                            Material.BUCKET, 0, false));
+                }
                 inv.addOriginalListing(new InvListener(plugin, inv) {
                     @EventHandler
                     public void onClick(InventoryClickEvent e) {
